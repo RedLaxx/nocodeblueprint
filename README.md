@@ -43,7 +43,7 @@ Then open `http://localhost:8000` in your browser.
 
 ## Before applying for AdSense or publishing
 
-- Replace `https://nocodeblueprint.com` in canonical URLs, JSON-LD, `robots.txt`, and `sitemap.xml` if the production domain is different.
+- The current canonical/deployment URL is `https://nocodeblueprint.deehasalo.workers.dev`; update it in canonical URLs, JSON-LD, `robots.txt`, and `sitemap.xml` if the deployment domain changes.
 - Replace `hello@nocodeblueprint.com` with a monitored publication inbox if needed.
 - Review the legal pages with the requirements that apply to your business, audience, location, and hosting setup; they are a strong plain-language starting point, not legal advice.
 - Add the exact active publisher line supplied by Google to `public/ads.txt` after AdSense approval. Do not leave the example placeholder active.
