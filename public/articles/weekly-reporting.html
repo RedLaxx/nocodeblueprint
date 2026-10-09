@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0">
+  <meta name="description" content="Build a repeatable reporting packet that gathers trusted numbers, explains changes, and leaves interpretation with the people closest to the work.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://nocodeblueprint.deehasalo.workers.dev/articles/weekly-reporting.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="NoCode Blueprint">
+  <meta property="og:title" content="Automate a weekly report without automating the thinking">
+  <meta property="og:description" content="Build a repeatable reporting packet that gathers trusted numbers, explains changes, and leaves interpretation with the people closest to the work.">
+  <meta property="og:url" content="https://nocodeblueprint.deehasalo.workers.dev/articles/weekly-reporting.html">
+  <meta name="twitter:card" content="summary">
+  <title>Automate a weekly report without automating the thinking — NoCode Blueprint</title>
+  <link rel="stylesheet" href="../assets/site.css">
+  <link rel="alternate" type="application/rss+xml" title="NoCode Blueprint feed" href="../feed.xml">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Automate a weekly report without automating the thinking", "description": "Build a repeatable reporting packet that gathers trusted numbers, explains changes, and leaves interpretation with the people closest to the work.", "datePublished": "2026-10-02", "dateModified": "2026-10-02", "author": {"@type": "Organization", "name": "NoCode Blueprint", "url": "https://nocodeblueprint.deehasalo.workers.dev/about.html"}, "publisher": {"@type": "Organization", "name": "NoCode Blueprint", "url": "https://nocodeblueprint.deehasalo.workers.dev/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://nocodeblueprint.deehasalo.workers.dev/articles/weekly-reporting.html"}, "articleSection": "Operations", "wordCount": 479}</script>
+</head>
+<body>
+<a class="skip-link" href="#article">Skip to article</a>
+<div class="topline">A practical field guide to AI automation <span>✳</span> Less busywork, better systems</div>
+<header class="site-header"><div class="wrap header-inner"><a class="brand" href="../" aria-label="NoCode Blueprint home"><span class="brand-mark">N</span><span class="brand-name">NoCode Blueprint<small>AI automation, made useful</small></span></a><nav class="nav-links" aria-label="Main navigation"><a href="../#latest">Blog</a><a href="../#method">Method</a><a href="../about.html">About</a><a href="../editorial-policy.html">Editorial</a></nav><a class="nav-cta" href="../contact.html">Contact <span aria-hidden="true">↗</span></a></div></header>
+<main class="wrap article-shell" id="article">
+  <div class="crumbs"><a href="../">Home</a> &nbsp;/&nbsp; <a href="../#latest">Articles</a> &nbsp;/&nbsp; Operations</div>
+  <header class="article-head"><span class="tag">Operations</span><h1>Automate a weekly report without automating the thinking</h1><p class="article-dek">Build a repeatable reporting packet that gathers trusted numbers, explains changes, and leaves interpretation with the people closest to the work.</p><div class="article-byline"><span>NoCode Blueprint</span><span class="byline-dot"></span><time datetime="2026-10-02">October 2, 2026</time><span class="byline-dot"></span><span>8 min read</span></div></header>
+  <div class="article-banner" role="img" aria-label="Gather → check → explain"><div class="banner-inner"><div class="banner-kicker">A NoCode Blueprint field note</div><div class="banner-title">Gather → check → explain</div></div></div>
+  <article class="article-content">
+<p>Weekly reports are a good automation candidate because the schedule repeats. They are a poor candidate for “let AI tell us what happened” because the numbers, definitions, and business context change underneath the prose.</p>
+<p>Build a reporting packet in two layers: a deterministic data layer that produces the numbers, and a reviewable narrative layer that helps a person explain what deserves attention.</p>
+<h2>Define the report contract</h2>
+<p>Before connecting anything, write down each metric's source, owner, time window, calculation, and acceptable freshness. Include what the metric does not mean. This small contract prevents a polished paragraph from hiding a changed definition.</p>
+<h2>Separate facts from commentary</h2>
+<ol><li>Query the approved sources and store the extraction timestamp.</li><li>Run checks for missing data, unexpected nulls, and comparison periods.</li><li>Calculate changes with code or spreadsheet formulas—not prose generation.</li><li>Ask AI to draft plain-language observations from the checked data.</li><li>Have the metric owner approve the packet before distribution.</li></ol>
+<div class="callout"><strong>Never let prose repair bad data.</strong> If a source is late or a number looks surprising, show the problem clearly and pause the narrative.</div>
+<h2>Give the model a narrow job</h2>
+<div class="prompt-box"><span class="prompt-label">Draft prompt · describe checked data</span>You are writing a draft for an internal weekly report. Use only the verified table below.
+
+For each notable change:
+- state the metric and period comparison;
+- give the exact values and percentage change provided;
+- suggest one question for the metric owner;
+- mark any result that may be affected by missing or late data.
+
+Do not invent causes, benchmarks, targets, customer stories, or recommendations. If the table does not support an explanation, say that the cause is unknown.
+
+Verified table: {{metrics}}</div>
+<h2>Make approval part of the template</h2>
+<p>Put a small sign-off block at the top: source refresh time, data owner, narrative reviewer, and approved date. Keep a changelog when definitions or sources change. A report people can audit is more valuable than one that arrives a few minutes earlier.</p>
+<h2>What to measure</h2>
+<p>Track preparation time, number of manual corrections, late-source incidents, and how often readers ask a question the report should have answered. The objective is not to produce more commentary. It is to make the recurring packet easier to trust.</p>
+<ul class="checklist"><li>Every number has a named source and time window.</li><li>Data validation happens before narrative generation.</li><li>Unexpected changes are flagged, not explained away.</li><li>A person who understands the metric approves the final report.</li></ul>
+<div class="callout"><strong>The blueprint:</strong> query trusted sources → validate → calculate → draft context → owner signs off. Automation prepares the meeting; people do the thinking.</div><div class="article-end"><a class="back-link" href="../#latest"><span aria-hidden="true">←</span> Back to all articles</a><span>Build thoughtfully · Review often</span></div></article>
+  <aside class="related"><h2>Keep building</h2><div class="related-links"><a href="lead-qualification.html">Qualify leads with AI</a><a href="support-ticket-routing.html">Route support tickets with AI while keeping escalation human</a><a href="invoice-processing.html">A safer AI-assisted invoice workflow for small teams</a><a href="ai-inbox-triage.html">Your first useful AI automation</a></div></aside>
+</main>
+<footer class="site-footer"><div class="wrap footer-inner"><a class="brand" href="../"><span class="brand-mark">N</span><span class="brand-name">NoCode Blueprint<small>AI automation, made useful</small></span></a><div class="footer-copy">Independent notes for people building better workflows. © <span id="year">2026</span> NoCode Blueprint.</div><nav class="footer-links" aria-label="Footer navigation"><a href="../#latest">Blog</a><a href="../about.html">About</a><a href="../editorial-policy.html">Editorial</a><a href="../contact.html">Contact</a><a href="../privacy-policy.html">Privacy</a><a href="../cookie-policy.html">Cookies</a><a href="../terms.html">Terms</a><a href="../disclaimer.html">Disclaimer</a></nav></div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

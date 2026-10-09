@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://nocodeblueprint.deehasalo.workers.dev/sitemap.xml

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel>
+<title>NoCode Blueprint — Practical AI Automation</title>
+<link>https://nocodeblueprint.deehasalo.workers.dev/</link>
+<description>Clear, no-hype guides for building useful AI automations and better workflows.</description>
+<language>en-us</language>
+<lastBuildDate>Thu, 08 Oct 2026 00:00:00 +0000</lastBuildDate>
+<item><title>Your first useful AI automation: an inbox triage</title>
+<link>https://nocodeblueprint.deehasalo.workers.dev/articles/ai-inbox-triage.html</link>
+<guid isPermaLink="true">https://nocodeblueprint.deehasalo.workers.dev/articles/ai-inbox-triage.html</guid>
+<pubDate>Thu, 08 Oct 2026 00:00:00 +0000</pubDate>
+<description>A small, reviewable workflow for turning a noisy inbox into a clear next-action queue—without letting a model send messages on your behalf.</description></item>
+<item><title>Qualify leads with AI—without letting it make the call</title>
+<link>https://nocodeblueprint.deehasalo.workers.dev/articles/lead-qualification.html</link>
+<guid isPermaLink="true">https://nocodeblueprint.deehasalo.workers.dev/articles/lead-qualification.html</guid>
+<pubDate>Wed, 07 Oct 2026 00:00:00 +0000</pubDate>
+<description>Use automation to structure incoming information and give your team useful context, while keeping qualification decisions accountable and reviewable.</description></item>
+<item><title>A content pipeline that still sounds like you</title>
+<link>https://nocodeblueprint.deehasalo.workers.dev/articles/content-repurposing.html</link>
+<guid isPermaLink="true">https://nocodeblueprint.deehasalo.workers.dev/articles/content-repurposing.html</guid>
+<pubDate>Tue, 06 Oct 2026 00:00:00 +0000</pubDate>
+<description>Turn one useful source into channel-ready drafts without turning your voice into generic AI copy.</description></item>
+<item><title>Turn meeting notes into owned actions, not a longer transcript</title>
+<link>https://nocodeblueprint.deehasalo.workers.dev/articles/meeting-notes-to-actions.html</link>
+<guid isPermaLink="true">https://nocodeblueprint.deehasalo.workers.dev/articles/meeting-notes-to-actions.html</guid>
+<pubDate>Mon, 05 Oct 2026 00:00:00 +0000</pubDate>
+<description>A review-first meeting workflow that extracts decisions and next steps while keeping the source, context, and owners visible.</description></item>
+<item><title>Route support tickets with AI while keeping escalation human</title>
+<link>https://nocodeblueprint.deehasalo.workers.dev/articles/support-ticket-routing.html</link>
+<guid isPermaLink="true">https://nocodeblueprint.deehasalo.workers.dev/articles/support-ticket-routing.html</guid>
+<pubDate>Sun, 04 Oct 2026 00:00:00 +0000</pubDate>
+<description>Use rules for urgent conditions and AI for language-heavy triage, with a visible fallback for unclear or sensitive requests.</description></item>
+<item><title>Automate a weekly report without automating the thinking</title>
+<link>https://nocodeblueprint.deehasalo.workers.dev/articles/weekly-reporting.html</link>
+<guid isPermaLink="true">https://nocodeblueprint.deehasalo.workers.dev/articles/weekly-reporting.html</guid>
+<pubDate>Fri, 02 Oct 2026 00:00:00 +0000</pubDate>
+<description>Build a repeatable reporting packet that gathers trusted numbers, explains changes, and leaves interpretation with the people closest to the work.</description></item>
+<item><title>Build a document intake workflow that knows when to stop</title>
+<link>https://nocodeblueprint.deehasalo.workers.dev/articles/document-intake.html</link>
+<guid isPermaLink="true">https://nocodeblueprint.deehasalo.workers.dev/articles/document-intake.html</guid>
+<pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate>
+<description>Extract useful fields from routine documents while preserving the original, validating the result, and escalating anything ambiguous.</description></item>
+<item><title>A safer AI-assisted invoice workflow for small teams</title>
+<link>https://nocodeblueprint.deehasalo.workers.dev/articles/invoice-processing.html</link>
+<guid isPermaLink="true">https://nocodeblueprint.deehasalo.workers.dev/articles/invoice-processing.html</guid>
+<pubDate>Tue, 29 Sep 2026 00:00:00 +0000</pubDate>
+<description>Reduce data entry around invoices with validation, duplicate checks, and explicit approval—without letting an AI release payment.</description></item>
+<item><title>A knowledge-base assistant that shows its work</title>
+<link>https://nocodeblueprint.deehasalo.workers.dev/articles/knowledge-base-assistant.html</link>
+<guid isPermaLink="true">https://nocodeblueprint.deehasalo.workers.dev/articles/knowledge-base-assistant.html</guid>
+<pubDate>Sun, 27 Sep 2026 00:00:00 +0000</pubDate>
+<description>Make internal answers easier to find with source-linked retrieval, clear “not found” behavior, and an owner for stale documentation.</description></item>
+<item><title>Make client onboarding feel personal with a calmer workflow</title>
+<link>https://nocodeblueprint.deehasalo.workers.dev/articles/client-onboarding.html</link>
+<guid isPermaLink="true">https://nocodeblueprint.deehasalo.workers.dev/articles/client-onboarding.html</guid>
+<pubDate>Fri, 25 Sep 2026 00:00:00 +0000</pubDate>
+<description>Automate the handoffs and reminders around onboarding while keeping promises, exceptions, and relationship moments in human hands.</description></item>
+<item><title>How to test an AI workflow before you trust it</title>
+<link>https://nocodeblueprint.deehasalo.workers.dev/articles/ai-workflow-evals.html</link>
+<guid isPermaLink="true">https://nocodeblueprint.deehasalo.workers.dev/articles/ai-workflow-evals.html</guid>
+<pubDate>Wed, 23 Sep 2026 00:00:00 +0000</pubDate>
+<description>Create a small evaluation set, define acceptable behavior, and watch real corrections so an automation improves instead of quietly drifting.</description></item>
+<item><title>Prompt versioning: the small habit that makes automation maintainable</title>
+<link>https://nocodeblueprint.deehasalo.workers.dev/articles/prompt-versioning.html</link>
+<guid isPermaLink="true">https://nocodeblueprint.deehasalo.workers.dev/articles/prompt-versioning.html</guid>
+<pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
+<description>Treat prompts like workflow logic: name them, review changes, keep test examples, and make it possible to roll back a bad edit.</description></item>
+<item><title>Automate scheduling without handing over your calendar</title>
+<link>https://nocodeblueprint.deehasalo.workers.dev/articles/calendar-scheduling.html</link>
+<guid isPermaLink="true">https://nocodeblueprint.deehasalo.workers.dev/articles/calendar-scheduling.html</guid>
+<pubDate>Sat, 19 Sep 2026 00:00:00 +0000</pubDate>
+<description>Let automation propose times and prepare context while keeping availability, attendees, and commitments under deliberate human control.</description></item>
+<item><title>Draft thoughtful follow-ups from your CRM, not from guesswork</title>
+<link>https://nocodeblueprint.deehasalo.workers.dev/articles/follow-up-drafts.html</link>
+<guid isPermaLink="true">https://nocodeblueprint.deehasalo.workers.dev/articles/follow-up-drafts.html</guid>
+<pubDate>Thu, 17 Sep 2026 00:00:00 +0000</pubDate>
+<description>Use approved context to prepare a relevant follow-up while keeping promises, pricing, and sensitive relationship decisions with a person.</description></item>
+<item><title>Before you automate it: a 15-minute process audit</title>
+<link>https://nocodeblueprint.deehasalo.workers.dev/articles/process-audit.html</link>
+<guid isPermaLink="true">https://nocodeblueprint.deehasalo.workers.dev/articles/process-audit.html</guid>
+<pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
+<description>A quick worksheet for finding the real bottleneck before you add another tool, integration, or AI step.</description></item>
+</channel></rss>
