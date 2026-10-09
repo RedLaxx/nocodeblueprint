@@ -1,0 +1,3 @@
+# NoCode Blueprint publisher inventory
+# Add the exact active publisher line supplied by Google AdSense after approval.
+# Example format (commented out intentionally): google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
