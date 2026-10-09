@@ -104,7 +104,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   color: #464a45;
 }
 .nav-links a { padding: 8px 0; }
-.nav-links a:hover { color: var(--green); }
+.nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--green); }
 .nav-cta, .button {
   display: inline-flex;
   align-items: center;
@@ -575,7 +575,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 .site-footer { padding: 29px 0; background: #eae9e1; border-top: 1px solid var(--line); }
 .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .footer-copy { color: var(--muted); font-size: 10px; }
-.footer-links { display: flex; gap: 17px; color: #5f655e; font: 9px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+.footer-links { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 8px 17px; max-width: 540px; color: #5f655e; font: 9px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
 
 @media (max-width: 1000px) {
   .home-hero { gap: 30px; grid-template-columns: 1fr 1fr; padding-top: 60px; }
