@@ -1,2 +1,20 @@
+# OS cruft
 .DS_Store
 Thumbs.db
+
+# Node — the build has no dependencies, but ignore them if anyone installs one
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Editors
+.idea/
+.vscode/
+*.swp
+
+# One-shot migration scratch space (never part of the site)
+.migration/
+
+# Local build scratch
+/tmp/
+*.tmp

@@ -1,0 +1,75 @@
+name: verify
+
+# Runs on every push to main and on every pull request, so a Pages CMS commit
+# is checked before Cloudflare rebuilds it. No secrets and no dependencies are
+# required: the repository builds with a bare Node install.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Build, test and check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          # No cache key: the project has no dependencies to install.
+
+      - name: Show the toolchain
+        run: |
+          node --version
+          echo "No npm install step: this project has zero dependencies."
+
+      - name: Unit tests
+        run: npm run test
+
+      - name: Build public/ from content/
+        run: npm run build
+
+      - name: Confirm the committed output matches the content
+        # If a Pages CMS commit changed content/ without regenerating public/,
+        # this fails and names the drifted files.
+        run: |
+          if [ -n "$(git status --porcelain -- public)" ]; then
+            echo "::error::public/ is out of sync with content/. Run 'npm run build' and commit the result."
+            git --no-pager diff --stat -- public
+            exit 1
+          fi
+          echo "public/ is in sync."
+
+      - name: Sync check
+        run: npm run verify
+
+      - name: Deployment checks
+        run: npm run check
+
+      - name: Preview smoke test
+        run: npm run smoke
+
+      - name: Summary
+        run: |
+          echo "### Verification passed" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "- unit tests" >> "$GITHUB_STEP_SUMMARY"
+          echo "- clean build of \`public/\` from \`content/\` and \`config/site.yml\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- committed output matches the content source" >> "$GITHUB_STEP_SUMMARY"
+          echo "- protected URLs, links, HTML, JSON-LD, sitemap, feed, canonical domain" >> "$GITHUB_STEP_SUMMARY"
+          echo "- local preview served every route with HTTP 200" >> "$GITHUB_STEP_SUMMARY"

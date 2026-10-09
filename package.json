@@ -1,0 +1,19 @@
+{
+  "name": "nocodeblueprint",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NoCode Blueprint — CMS-driven static site built from content/ into public/ for Cloudflare.",
+  "type": "module",
+  "engines": {
+    "node": ">=20.11"
+  },
+  "scripts": {
+    "build": "node build/build.mjs",
+    "verify": "node build/verify.mjs",
+    "check": "node build/check.mjs",
+    "test": "node build/test/run.mjs",
+    "smoke": "node build/smoke.mjs",
+    "preview": "node build/preview.mjs",
+    "ci": "npm run test && npm run build && npm run verify && npm run check && npm run smoke"
+  }
+}

@@ -1,0 +1,36 @@
+name: NoCode Blueprint
+brandMark: N
+tagline: AI automation, made useful
+themeColor: "#f6f5f0"
+baseUrl: https://nocodeblueprint.deehasalo.workers.dev
+description: NoCode Blueprint is a practical journal for building useful AI automations, no-code workflows, and calmer systems for work.
+shareDescription: Clear, no-hype guides for building useful AI automations and better workflows.
+schemaDescription: A practical field guide to AI automation, no-code workflows, and calmer systems for work.
+homeTitle: NoCode Blueprint — Practical AI Automation
+homeUpdated: 2026-10-09
+authorName: NoCode Blueprint
+aboutPage: about
+contactEmail: hello@nocodeblueprint.com
+ctaSlug: contact
+ctaLabel: Contact
+footerCopy: Independent notes for people building better workflows.
+copyrightYear: 2026
+toplineLeft: A practical field guide to AI automation
+toplineRight: Less busywork, better systems
+bannerKicker: A NoCode Blueprint field note
+backLinkLabel: Back to all articles
+articleEndNote: Build thoughtfully · Review often
+relatedHeading: Keep building
+sidebarTitle: Site information
+feedTitle: NoCode Blueprint — Practical AI Automation
+feedDescription: Clear, no-hype guides for building useful AI automations and better workflows.
+feedLanguage: en-us
+categories:
+  - name: Workflow
+    button: Workflows
+  - name: Operations
+    button: Operations
+  - name: Content
+    button: Content
+  - name: Foundations
+    button: Foundations

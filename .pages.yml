@@ -1,0 +1,541 @@
+# ---------------------------------------------------------------------------
+# Pages CMS configuration for NoCode Blueprint
+# https://pagescms.org/docs/configuration/
+#
+# How to use it
+#   1. Open https://app.pagescms.org and sign in with GitHub.
+#   2. Install the Pages CMS GitHub App on the account that owns
+#      RedLaxx/nocodeblueprint (choose "Only select repositories").
+#   3. Pick the repository, then pick a branch in the menu at the top left.
+#   4. Edit an entry and save. Pages CMS commits the file straight back to the
+#      branch you selected. Cloudflare rebuilds and deploys automatically.
+#
+# Every key used below is part of the published Pages CMS schema
+# (lib/config-schema.ts in pages-cms/pages-cms). No custom or invented keys.
+#
+# Why the body field is `type: code` and not `type: rich-text`
+#   The rich-text editor stores content through a Tiptap document model, so
+#   anything outside its node schema is discarded on save. This site's articles
+#   depend on components that Tiptap does not know about (:::callout,
+#   :::notice, :::checklist, :::prompt and the raw HTML contact card). A
+#   `code` field has no read/write transform at all, so the Markdown below the
+#   frontmatter is committed byte-for-byte and nothing can be silently lost.
+#   Editors still get a syntax-highlighted Markdown editor with line wrapping,
+#   and every other field on the form is a normal typed input.
+# ---------------------------------------------------------------------------
+
+media:
+  input: public/media
+  output: /media
+  categories: [image]
+  rename: safe
+
+content:
+  # -------------------------------------------------------------------------
+  # Posts -> public/articles/<slug>.html
+  # -------------------------------------------------------------------------
+  - name: posts
+    label: Posts
+    description: >-
+      Articles published at /articles/<slug>.html. Saving writes
+      content/posts/<slug>.md; the build regenerates the article, the homepage
+      card, sitemap.xml and feed.xml.
+    type: collection
+    path: content/posts
+    format: yaml-frontmatter
+    filename: "{fields.slug}.md"
+    exclude: [README.md]
+    view:
+      fields: [title, category, date, status]
+      primary: title
+      sort: [date, title, category, status]
+      search: [title, description, category, tags]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+        description: Heading shown on the article, the homepage card and the RSS feed.
+        options:
+          minlength: 8
+          maxlength: 110
+
+      - name: slug
+        label: URL slug
+        type: string
+        required: true
+        pattern:
+          regex: "^[a-z0-9]+(-[a-z0-9]+)*$"
+          message: "Lowercase letters, numbers and single dashes only, for example ai-inbox-triage"
+        description: >-
+          Decides the public URL /articles/<slug>.html and the file name. Set it
+          once, when the post is new: changing it later moves the article and
+          breaks every existing link, including the 15 launch URLs.
+        options:
+          minlength: 3
+          maxlength: 80
+
+      - name: status
+        label: Status
+        type: select
+        required: true
+        default: draft
+        description: "Drafts are built nowhere: no HTML, no homepage card, no sitemap entry, no feed item."
+        options:
+          values:
+            - label: Published
+              value: published
+            - label: Draft
+              value: draft
+
+      - name: date
+        label: Published date
+        type: date
+        required: true
+        description: Shown in the byline and used for archive and feed ordering.
+
+      - name: updated
+        label: Last updated
+        type: date
+        description: >-
+          Optional. Used for dateModified in the Article JSON-LD and for
+          lastmod in sitemap.xml. Leave empty to reuse the published date.
+
+      - name: category
+        label: Category
+        type: select
+        required: true
+        description: >-
+          Drives the article tag, the breadcrumb, the homepage filter button and
+          articleSection in the JSON-LD. Adding a new category needs the same
+          name in config/site.yml under "categories".
+        options:
+          values:
+            - Workflow
+            - Operations
+            - Content
+            - Foundations
+
+      - name: description
+        label: Summary
+        type: text
+        required: true
+        description: One or two sentences. Used as the article dek, the homepage card text, the meta description and the RSS summary.
+        options:
+          minlength: 40
+          maxlength: 320
+
+      - name: seo_title
+        label: SEO title
+        type: string
+        description: >-
+          Browser tab title and the title search results show. Leave empty to
+          use "<title> — NoCode Blueprint".
+        options:
+          maxlength: 140
+
+      - name: seo_description
+        label: SEO description
+        type: text
+        description: Optional override for the meta and Open Graph description. Leave empty to reuse the summary.
+        options:
+          maxlength: 320
+
+      - name: tags
+        label: Tags
+        type: string
+        list:
+          min: 0
+          max: 12
+          # Pages CMS requires `collapsible` whenever `list` is an object.
+          # false keeps the three inputs flat instead of hiding them behind a toggle.
+          collapsible: false
+        description: >-
+          Search keywords for the homepage filter. They are not displayed; they
+          only widen what the archive search matches. Phrases are fine.
+
+      - name: reading_minutes
+        label: Reading time (minutes)
+        type: number
+        description: Shown as "N min read". Leave empty to estimate from the body at roughly 200 words per minute.
+        options:
+          min: 1
+          max: 120
+          step: 1
+
+      - name: word_count
+        label: Word count
+        type: number
+        description: Optional. Reported as wordCount in the Article JSON-LD. Leave empty to count the body automatically.
+        options:
+          min: 1
+          step: 1
+
+      - name: banner_title
+        label: Banner title
+        type: string
+        required: true
+        description: >-
+          Short line inside the article banner, usually the shape of the
+          workflow, for example "Capture → sort → review". Also used as the
+          banner's accessible name.
+        options:
+          minlength: 4
+          maxlength: 60
+
+      - name: card_art
+        label: Card artwork
+        type: select
+        required: true
+        default: system
+        description: Colour and pattern of the homepage card. Must be one of the variants defined in public/assets/site.css.
+        options:
+          values: [mail, lead, content, audit, system, ops]
+
+      - name: card_steps
+        label: Card steps
+        type: string
+        list:
+          min: 3
+          max: 3
+          collapsible: false
+        required: true
+        description: >-
+          Exactly three very short lines drawn on the homepage card, for
+          example "New message lands", "AI suggests a label", "Human chooses
+          next action".
+
+      - name: featured
+        label: Feature on the homepage
+        type: boolean
+        description: >-
+          Shows this article in the large "Start here" slot. Only one post may
+          be featured; the build fails if two are. Leave off to feature the
+          newest article automatically.
+
+      - name: archive_position
+        label: Archive position
+        type: number
+        description: >-
+          Optional. Pins the article to an exact slot in the homepage grid
+          (1 = first). Leave empty to sort by published date, newest first.
+        options:
+          min: 1
+          step: 1
+
+      - name: related
+        label: Related posts
+        type: string
+        list:
+          min: 0
+          max: 4
+          collapsible: false
+        description: >-
+          Slugs of up to four other posts for the "Keep building" panel. The
+          link text is the target title shortened at its first colon or dash.
+          Every slug must be a published post.
+
+      - name: body
+        label: Article body
+        type: code
+        required: true
+        description: >-
+          Markdown. Headings (##), paragraphs, lists, **bold** and `code` work
+          as usual. The four site components are written as :::callout,
+          :::notice, :::checklist and :::prompt "Label" blocks, each closed
+          with a line containing only :::. See content/README.md.
+        options:
+          format: markdown
+
+  # -------------------------------------------------------------------------
+  # Pages -> public/<slug>.html
+  # -------------------------------------------------------------------------
+  - name: pages
+    label: Pages
+    description: >-
+      The About, Editorial policy, Contact and legal pages published at
+      /<slug>.html. These are trust pages: review every change in a pull
+      request before it reaches main.
+    type: collection
+    path: content/pages
+    format: yaml-frontmatter
+    filename: "{fields.slug}.md"
+    exclude: [README.md]
+    operations:
+      delete: false
+    view:
+      fields: [title, order, updated, status]
+      primary: title
+      sort: [order, title, updated]
+      search: [title, description]
+      default:
+        sort: order
+        order: asc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+        options:
+          minlength: 3
+          maxlength: 90
+
+      - name: slug
+        label: URL slug
+        type: string
+        required: true
+        pattern:
+          regex: "^[a-z0-9]+(-[a-z0-9]+)*$"
+          message: "Lowercase letters, numbers and single dashes only"
+        description: >-
+          Decides the public URL /<slug>.html and the file name. The seven
+          launch pages (about, editorial-policy, contact, privacy-policy,
+          cookie-policy, terms, disclaimer) must keep their slugs: the footer,
+          the sidebar and every indexed link depend on them.
+
+      - name: status
+        label: Status
+        type: select
+        required: true
+        default: published
+        description: A draft page is not built, and its links from the header, footer and sidebar disappear.
+        options:
+          values:
+            - label: Published
+              value: published
+            - label: Draft
+              value: draft
+
+      - name: order
+        label: Order
+        type: number
+        required: true
+        description: Position in the footer, the sidebar and sitemap.xml. The launch pages use 1 to 7.
+        options:
+          min: 1
+          step: 1
+
+      - name: updated
+        label: Last updated
+        type: date
+        description: Used for lastmod in sitemap.xml. Leave empty to reuse the site-wide date.
+
+      - name: eyebrow
+        label: Eyebrow
+        type: string
+        required: true
+        description: Small label above the heading, for example "The project" or "Say hello".
+        options:
+          maxlength: 60
+
+      - name: intro
+        label: Intro
+        type: text
+        required: true
+        description: One or two sentences under the heading.
+        options:
+          minlength: 20
+          maxlength: 300
+
+      - name: description
+        label: Summary
+        type: text
+        required: true
+        description: Meta and Open Graph description for this page.
+        options:
+          minlength: 40
+          maxlength: 320
+
+      - name: seo_title
+        label: SEO title
+        type: string
+        description: Browser tab title and Open Graph title. Leave empty to use "<title> — NoCode Blueprint".
+        options:
+          maxlength: 140
+
+      - name: seo_description
+        label: SEO description
+        type: text
+        description: Optional override for the meta and Open Graph description.
+        options:
+          maxlength: 320
+
+      - name: in_nav
+        label: Show in the header navigation
+        type: boolean
+        description: On for About and Editorial policy, off for the rest.
+
+      - name: nav_label
+        label: Header label
+        type: string
+        description: Short label used in the header when "Show in the header navigation" is on, for example "Editorial".
+        options:
+          maxlength: 30
+
+      - name: footer_label
+        label: Footer label
+        type: string
+        required: true
+        description: Short label used in the site footer, for example "Privacy" or "Cookies".
+        options:
+          maxlength: 30
+
+      - name: sidebar_label
+        label: Sidebar label
+        type: string
+        required: true
+        description: Label used in the "Site information" sidebar, for example "Privacy policy".
+        options:
+          maxlength: 40
+
+      - name: body
+        label: Page body
+        type: code
+        required: true
+        description: >-
+          Markdown, same syntax as posts. Legal copy is published exactly as
+          written here, so review the diff in a pull request before merging.
+          See content/README.md for the component blocks.
+        options:
+          format: markdown
+
+  # -------------------------------------------------------------------------
+  # Site settings -> config/site.yml
+  # -------------------------------------------------------------------------
+  - name: site
+    label: Site settings
+    description: >-
+      Site-wide identity, canonical URL, navigation wording and feed metadata.
+      Changing baseUrl rewrites every canonical URL, the sitemap and robots.txt.
+    type: file
+    path: config/site.yml
+    format: yaml
+    fields:
+      - name: name
+        label: Site name
+        type: string
+        required: true
+
+      - name: tagline
+        label: Tagline
+        type: string
+        required: true
+        description: Small line under the logo in the header and footer.
+
+      - name: baseUrl
+        label: Canonical base URL
+        type: string
+        required: true
+        pattern:
+          regex: "^https://[^/\\s]+$"
+          message: "Use an absolute https URL with no trailing slash"
+        description: >-
+          Currently https://nocodeblueprint.deehasalo.workers.dev — the live
+          Cloudflare deployment. Used for canonical URLs, Open Graph, JSON-LD,
+          sitemap.xml and robots.txt. No trailing slash.
+
+      - name: homeTitle
+        label: Homepage title
+        type: string
+        required: true
+
+      - name: description
+        label: Homepage meta description
+        type: text
+        required: true
+
+      - name: shareDescription
+        label: Homepage share description
+        type: text
+        description: Open Graph description for the homepage and the feed description.
+
+      - name: homeUpdated
+        label: Homepage last updated
+        type: date
+        required: true
+        description: "lastmod for the homepage in sitemap.xml. The build uses whichever is newer: this date or the newest article."
+
+      - name: contactEmail
+        label: Contact email
+        type: string
+        required: true
+        description: Published on the contact page and referenced by the privacy policy.
+
+      - name: footerCopy
+        label: Footer line
+        type: string
+        required: true
+        description: Sentence before the copyright symbol in the footer.
+
+      - name: copyrightYear
+        label: Copyright year
+        type: number
+        required: true
+        description: Fallback year in the footer. public/assets/site.js replaces it with the visitor's current year at runtime.
+        options:
+          min: 2000
+          max: 2999
+          step: 1
+
+      - name: toplineLeft
+        label: Topline left
+        type: string
+        required: true
+        description: Text before the ✳ in the thin bar at the very top of every page.
+
+      - name: toplineRight
+        label: Topline right
+        type: string
+        required: true
+        description: Text after the ✳ in the top bar.
+
+      - name: bannerKicker
+        label: Article banner kicker
+        type: string
+        required: true
+        description: Small line above the banner title on every article.
+
+      - name: feedTitle
+        label: Feed title
+        type: string
+        description: Title of feed.xml. Leave empty to reuse the homepage title.
+
+      - name: feedDescription
+        label: Feed description
+        type: text
+        description: Channel description in feed.xml.
+
+      - name: categories
+        label: Categories
+        type: object
+        list: true
+        description: >-
+          Category names in filter order, plus the plural label used on the
+          homepage filter button. A category with no published article is
+          hidden automatically.
+        fields:
+          - name: name
+            label: Name
+            type: string
+            required: true
+            description: Must match the category chosen on each post, for example "Workflow".
+          - name: button
+            label: Filter button label
+            type: string
+            description: Text on the homepage filter button, for example "Workflows". Defaults to the name.
+
+settings:
+  content:
+    # Keep frontmatter keys that are not part of the schema above, so a save
+    # can never drop a value the build depends on.
+    merge: true
+  commit:
+    identity: app
+    templates:
+      create: "content: add {path} (via Pages CMS)"
+      update: "content: update {path} (via Pages CMS)"
+      delete: "content: remove {path} (via Pages CMS)"
+      rename: "content: rename {oldPath} to {newPath} (via Pages CMS)"
